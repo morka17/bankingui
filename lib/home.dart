@@ -1,4 +1,5 @@
 import 'package:exaltedvision/reusable_btn.dart';
+import 'package:exaltedvision/send_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -93,27 +94,37 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           padding: EdgeInsets.only(right:6.0, bottom: 6.0),
                           alignment: Alignment.topRight,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xFF283283),
-                              borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                            ),
-                            height: 35.0,
-                            width: 70.0,
-                            alignment: Alignment.centerRight,
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  ' Copy ',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          child: MaterialButton(
+                            elevation: 3.0,
+                            onPressed: ()=>print('copied'),
+                            child: Tooltip(
+                              decoration: BoxDecoration(
+                                color: Colors.white
+                              ),
+                              message: 'Copied',
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF283283),
+                                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
                                 ),
-                                Icon(Icons.content_copy,
-                                color: Colors.white,
-                                )
-                              ],
+                                height: 35.0,
+                                width: 70.0,
+                                alignment: Alignment.centerRight,
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      ' Copy ',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(Icons.content_copy,
+                                    color: Colors.white,
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -148,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                 height: 40.0,
               ),
               InkWell(
-                onTap: () => print('hello world'),
+                onTap: () => Navigator.pushNamed(context, SendPage.id),
                 child: Container(
                   alignment: Alignment.bottomCenter,
                   child: DefaultButton(
@@ -281,3 +292,9 @@ class SubAccountBoard extends StatelessWidget {
     );
   }
 }
+
+
+// …or push an existing repository from the command line
+// git remote add origin https://github.com/morka17/bankingui.git
+// git branch -M master
+// git push -u origin master

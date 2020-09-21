@@ -67,9 +67,11 @@ class _ScreenTextFieldsState extends State<ScreenTextFields>
     _focusNode.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: TextStyle(color: Colors.white),
       controller: widget.textEditingController,
       keyboardType: widget.textInputType,
       obscureText: widget.obscure,

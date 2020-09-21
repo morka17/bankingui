@@ -1,6 +1,8 @@
 import 'package:exaltedvision/home.dart';
 import 'package:exaltedvision/resuable_inputfield.dart';
 import 'package:exaltedvision/reusable_btn.dart';
+import 'package:exaltedvision/signup.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,6 +14,38 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController _fneditingController = TextEditingController();
   TextEditingController _pweditingController = TextEditingController();
+  String pwd;
+  String email;
+
+  void _showAlert(String errMessage, context) {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text(
+            'Error',
+            style: TextStyle(color: Colors.red),
+          ),
+          content: Text(
+            errMessage,
+            style:
+                TextStyle(color: Colors.redAccent, fontWeight: FontWeight.w400),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'Ok',
+                style:
+                    TextStyle(color: Colors.green, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -40,10 +74,9 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       'Welcome Back!',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 28.0
-                      ),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 28.0),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
@@ -51,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                         'Log into your account',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight:FontWeight.w400,
+                          fontWeight: FontWeight.w400,
                           fontSize: 17.0,
                         ),
                       ),
@@ -65,7 +98,8 @@ class _LoginPageState extends State<LoginPage> {
               top: size.height * 0.25,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20.0),
                   ),
                   color: Colors.black,
                 ),
@@ -85,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: ScreenTextFields(
                         lableText: 'Email*',
                         label: 'example19@gmail.com',
-                        onchange: (value) => print(value),
+                        onchange: (value) => email = value,
                         obscure: false,
                         textEditingController: _fneditingController,
                         textInputType: TextInputType.emailAddress,
@@ -98,27 +132,38 @@ class _LoginPageState extends State<LoginPage> {
                       child: ScreenTextFields(
                         lableText: 'Password*',
                         label: 'Password',
-                        onchange: (value) => print(value),
+                        onchange: (value) => pwd = value,
                         obscure: true,
                         textEditingController: _pweditingController,
                         textInputType: TextInputType.text,
                       ),
                     ),
                     Container(
-                      width: size.width *0.8 ,
+                      width: size.width * 0.8,
                       alignment: Alignment.topRight,
                       child: Text(
                         'Forgot Password?',
-                        style:TextStyle(
+                        style: TextStyle(
                           color: Colors.green,
-                        ) ,
+                        ),
                       ),
                     ),
                     Container(
                       child: DefaultButton2(
-                        textLabel: 'Continue', 
+                        textLabel: 'Continue',
                         color: Color(0xff4d61ee),
-                        onTap: ()=> Navigator.pushNamed(context, HomePage.id),
+                        onTap: () {
+                          if (email != null && pwd != null) {
+                            Navigator.pushNamed(context, HomePage.id);
+                          } else if (email == null) {
+                            _showAlert('Invaild email address', context);
+                          } else if (email == null && pwd == null) {
+                            _showAlert(
+                                'Invaild email address and password', context);
+                          } else {
+                            _showAlert('No such password', context);
+                          }
+                        },
                         width: size.width * 0.6,
                       ),
                     ),
@@ -129,18 +174,20 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Text(
                             'New here?',
-                            style: TextStyle(
-                              color: Colors.white
-                            ),
+                            style: TextStyle(color: Colors.white),
                           ),
                           SizedBox(
                             width: 18.0,
                           ),
-                          Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              color: Colors.green,
+                          GestureDetector(
+                            onTap: () =>
+                                Navigator.pushNamed(context, SignUp.id),
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                color: Colors.green,
+                              ),
                             ),
                           )
                         ],

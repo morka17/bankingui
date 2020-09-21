@@ -1,7 +1,11 @@
+
+
 import 'package:exaltedvision/home.dart';
 import 'package:exaltedvision/page2.dart';
 import 'package:exaltedvision/page3_login.dart';
 import 'package:exaltedvision/reusable_btn.dart';
+import 'package:exaltedvision/security_check_page.dart';
+import 'package:exaltedvision/send_page.dart';
 import 'package:exaltedvision/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +29,9 @@ class MyApp extends StatelessWidget {
         Page2.id: (context) => Page2(),
         LoginPage.id: (context) => LoginPage(),
         SignUp.id: (context) => SignUp(),
-        HomePage.id: (context)=> HomePage(),
+        HomePage.id: (context) => HomePage(),
+        SendPage.id: (context) => SendPage(),
+        SecurityCheckPage.id:(context)=> SecurityCheckPage()
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:exaltedvision/page3_login.dart';
 import 'package:exaltedvision/reusable_btn.dart';
 import 'package:exaltedvision/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Page2 extends StatefulWidget {
   static const String id = '/page2';
@@ -50,11 +51,7 @@ class _Page2State extends State<Page2> {
                 'Customize your budget categories and\nstay on top of your spending 24/7.',
             activePageColor: activePageColor,
             inactivePageColor: inactivePageColor,
-            iconWidget: Icon(
-              Icons.account_balance_wallet,
-              color: Colors.green,
-              size: 100.0,
-            ),
+            iconWidget: Icon(FontAwesomeIcons.piggyBank, color: Colors.green,size: 100,),
             indicatorIndex: 1,
           ),
           PageWidget(
@@ -65,7 +62,7 @@ class _Page2State extends State<Page2> {
             activePageColor: activePageColor,
             inactivePageColor: inactivePageColor,
             iconWidget: Icon(
-              Icons.account_balance_wallet,
+              FontAwesomeIcons.icons,
               color: Colors.green,
               size: 100.0,
             ),

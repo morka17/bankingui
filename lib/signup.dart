@@ -1,6 +1,7 @@
 import 'package:exaltedvision/home.dart';
 import 'package:exaltedvision/resuable_inputfield.dart';
 import 'package:exaltedvision/reusable_btn.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -11,7 +12,40 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   TextEditingController _pweditingController = TextEditingController();
+  TextEditingController _eneditingController = TextEditingController();
   TextEditingController _fneditingController = TextEditingController();
+  String email;
+  String name;
+  String pwd;
+
+  void _showAlert(String errMessage, context) {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text(
+            'Error',
+            style: TextStyle(color: Colors.red),
+          ),
+          content: Text(
+            errMessage,
+            style:
+                TextStyle(color: Colors.redAccent, fontWeight: FontWeight.w400),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'Ok',
+                style:
+                    TextStyle(color: Colors.green, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +123,9 @@ class _SignUpState extends State<SignUp> {
                       child: ScreenTextFields(
                         lableText: 'Name*',
                         label: 'Name',
-                        onchange: (value) => print(value),
+                        onchange: (value) {
+                          name = value;
+                        },
                         obscure: false,
                         textEditingController: _fneditingController,
                         textInputType: TextInputType.emailAddress,
@@ -102,9 +138,9 @@ class _SignUpState extends State<SignUp> {
                       child: ScreenTextFields(
                         lableText: 'Email*',
                         label: 'example19@gmail.com',
-                        onchange: (value) => print(value),
+                        onchange: (value) => email = value,
                         obscure: false,
-                        textEditingController: _fneditingController,
+                        textEditingController: _eneditingController,
                         textInputType: TextInputType.emailAddress,
                       ),
                     ),
@@ -115,7 +151,9 @@ class _SignUpState extends State<SignUp> {
                       child: ScreenTextFields(
                         lableText: 'Password*',
                         label: 'Password',
-                        onchange: (value) => print(value),
+                        onchange: (value) {
+                          pwd = value;
+                        },
                         obscure: true,
                         textEditingController: _pweditingController,
                         textInputType: TextInputType.text,
@@ -135,7 +173,19 @@ class _SignUpState extends State<SignUp> {
                       child: DefaultButton2(
                         textLabel: 'Get Started',
                         color: Color(0xff4d61ee),
-                        onTap: ()=> Navigator.pushNamed(context, HomePage.id),
+                        onTap: () {
+                          if (email != null && pwd != null && name != null) {
+                            Navigator.pushNamed(context, HomePage.id);
+                          } else if (email.isEmpty) {
+                            _showAlert('Invaild emaill address', context);
+                          } else if (name.isEmpty){
+                            _showAlert('Enter your name*', context);
+                          } else if (pwd.isEmpty)
+                            _showAlert('Enter your password', context);
+                          else {
+                            _showAlert('Fill out the Boxes', context);
+                          }
+                        },
                         width: size.width * 0.6,
                       ),
                     ),
@@ -167,7 +217,7 @@ class _SignUpState extends State<SignUp> {
             ),
             Positioned(
               left: size.width * 0.1,
-              bottom: size.height * 0.1,
+              bottom: size.height * 0.08,
               child: Container(
                 child: RichText(
                   textAlign: TextAlign.center,
@@ -178,9 +228,13 @@ class _SignUpState extends State<SignUp> {
                     ),
                     children: <TextSpan>[
                       TextSpan(text: 'By signing up you agree to our '),
-                      TextSpan(text: 'Terms of use ', style: TextStyle(color: Colors.greenAccent)),
+                      TextSpan(
+                          text: 'Terms of use ',
+                          style: TextStyle(color: Colors.greenAccent)),
                       TextSpan(text: 'and\n '),
-                      TextSpan(text: 'Privacy Policy', style: TextStyle(color: Colors.greenAccent))
+                      TextSpan(
+                          text: 'Privacy Policy',
+                          style: TextStyle(color: Colors.greenAccent))
                     ],
                   ),
                 ),
