@@ -51,196 +51,198 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        width: size.width,
-        height: size.height,
-        color: Colors.black,
-        child: Stack(
-          children: <Widget>[
-            Container(
-              height: size.height * 0.4,
-              width: size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(25.0),
-                  bottomRight: Radius.circular(25.0),
-                ),
-                color: Color(0xff292765),
-              ),
-              child: Container(
-                margin: EdgeInsets.only(top: size.height * .10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Welcome Back!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 28.0,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        'Experience banking the way you\'ve always\nwanted',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17.0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              right: 30,
-              top: size.height * 0.25,
-              child: Container(
+      body: SingleChildScrollView(
+        child: Container(
+          width: size.width,
+          height: size.height,
+          color: Colors.black,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: size.height * 0.4,
+                width: size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
+                    bottomLeft: Radius.circular(25.0),
+                    bottomRight: Radius.circular(25.0),
                   ),
-                  color: Colors.black,
+                  color: Color(0xff292765),
                 ),
-                height: size.height * 0.55,
-                width: size.width * 0.85,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 19.0,
-                    ),
-                    Container(
-                      width: size.width * 0.73,
-                      height: 52.0,
-                      padding: EdgeInsets.all(5.0),
-                      child: ScreenTextFields(
-                        lableText: 'Name*',
-                        label: 'Name',
-                        onchange: (value) {
-                          name = value;
-                        },
-                        obscure: false,
-                        textEditingController: _fneditingController,
-                        textInputType: TextInputType.emailAddress,
-                      ),
-                    ),
-                    Container(
-                      width: size.width * 0.73,
-                      height: 52.0,
-                      padding: EdgeInsets.all(5.0),
-                      child: ScreenTextFields(
-                        lableText: 'Email*',
-                        label: 'example19@gmail.com',
-                        onchange: (value) => email = value,
-                        obscure: false,
-                        textEditingController: _eneditingController,
-                        textInputType: TextInputType.emailAddress,
-                      ),
-                    ),
-                    Container(
-                      width: size.width * 0.73,
-                      height: 52.0,
-                      padding: EdgeInsets.all(5.0),
-                      child: ScreenTextFields(
-                        lableText: 'Password*',
-                        label: 'Password',
-                        onchange: (value) {
-                          pwd = value;
-                        },
-                        obscure: true,
-                        textEditingController: _pweditingController,
-                        textInputType: TextInputType.text,
-                      ),
-                    ),
-                    Container(
-                      width: size.width * 0.8,
-                      alignment: Alignment.topRight,
-                      child: Text(
-                        'Forgot Password?',
+                child: Container(
+                  margin: EdgeInsets.only(top: size.height * .10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome Back!',
                         style: TextStyle(
-                          color: Colors.green,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 28.0,
                         ),
                       ),
-                    ),
-                    Container(
-                      child: DefaultButton2(
-                        textLabel: 'Get Started',
-                        color: Color(0xff4d61ee),
-                        onTap: () {
-                          if (email != null && pwd != null && name != null) {
-                            Navigator.pushNamed(context, HomePage.id);
-                          } else if (email.isEmpty) {
-                            _showAlert('Invaild emaill address', context);
-                          } else if (name.isEmpty){
-                            _showAlert('Enter your name*', context);
-                          } else if (pwd.isEmpty)
-                            _showAlert('Enter your password', context);
-                          else {
-                            _showAlert('Fill out the Boxes', context);
-                          }
-                        },
-                        width: size.width * 0.6,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 7.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Been here before?',
-                            style: TextStyle(color: Colors.white),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          'Experience banking the way you\'ve always\nwanted',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17.0,
                           ),
-                          SizedBox(
-                            width: 18.0,
-                          ),
-                          Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              color: Colors.green,
-                            ),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              left: size.width * 0.1,
-              bottom: size.height * 0.08,
-              child: Container(
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  softWrap: true,
-                  text: TextSpan(
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(text: 'By signing up you agree to our '),
-                      TextSpan(
-                          text: 'Terms of use ',
-                          style: TextStyle(color: Colors.greenAccent)),
-                      TextSpan(text: 'and\n '),
-                      TextSpan(
-                          text: 'Privacy Policy',
-                          style: TextStyle(color: Colors.greenAccent))
                     ],
                   ),
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                right: 30,
+                top: size.height * 0.25,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0),
+                    ),
+                    color: Colors.black,
+                  ),
+                  height: size.height * 0.55,
+                  width: size.width * 0.85,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 19.0,
+                      ),
+                      Container(
+                        width: size.width * 0.73,
+                        height: 52.0,
+                        padding: EdgeInsets.all(5.0),
+                        child: ScreenTextFields(
+                          lableText: 'Name*',
+                          label: 'Name',
+                          onchange: (value) {
+                            name = value;
+                          },
+                          obscure: false,
+                          textEditingController: _fneditingController,
+                          textInputType: TextInputType.emailAddress,
+                        ),
+                      ),
+                      Container(
+                        width: size.width * 0.73,
+                        height: 52.0,
+                        padding: EdgeInsets.all(5.0),
+                        child: ScreenTextFields(
+                          lableText: 'Email*',
+                          label: 'example19@gmail.com',
+                          onchange: (value) => email = value,
+                          obscure: false,
+                          textEditingController: _eneditingController,
+                          textInputType: TextInputType.emailAddress,
+                        ),
+                      ),
+                      Container(
+                        width: size.width * 0.73,
+                        height: 52.0,
+                        padding: EdgeInsets.all(5.0),
+                        child: ScreenTextFields(
+                          lableText: 'Password*',
+                          label: 'Password',
+                          onchange: (value) {
+                            pwd = value;
+                          },
+                          obscure: true,
+                          textEditingController: _pweditingController,
+                          textInputType: TextInputType.text,
+                        ),
+                      ),
+                      Container(
+                        width: size.width * 0.8,
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Colors.green,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: DefaultButton2(
+                          textLabel: 'Get Started',
+                          color: Color(0xff4d61ee),
+                          onTap: () {
+                            if (email != null && pwd != null && name != null) {
+                              Navigator.pushNamed(context, HomePage.id);
+                            } else if (email.isEmpty) {
+                              _showAlert('Invaild emaill address', context);
+                            } else if (name.isEmpty){
+                              _showAlert('Enter your name*', context);
+                            } else if (pwd.isEmpty)
+                              _showAlert('Enter your password', context);
+                            else {
+                              _showAlert('Fill out the Boxes', context);
+                            }
+                          },
+                          width: size.width * 0.6,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 7.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Been here before?',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(
+                              width: 18.0,
+                            ),
+                            Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                color: Colors.green,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                left: size.width * 0.1,
+                bottom: size.height * 0.08,
+                child: Container(
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'By signing up you agree to our '),
+                        TextSpan(
+                            text: 'Terms of use ',
+                            style: TextStyle(color: Colors.greenAccent)),
+                        TextSpan(text: 'and\n '),
+                        TextSpan(
+                            text: 'Privacy Policy',
+                            style: TextStyle(color: Colors.greenAccent))
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

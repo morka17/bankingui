@@ -134,7 +134,7 @@ class PasswordBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 20,
-      height: 0,
+      height: 50,
       child: TextField(
         style: TextStyle(color: Colors.white),
         maxLength: 1,
